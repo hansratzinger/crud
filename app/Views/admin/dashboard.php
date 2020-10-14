@@ -1,3 +1,3 @@
-<h1>Dashboard</h1>
-<div>
-    
+<?= $this->extend('admin/layouts/main') ?>
+<?= $this->section('content') ?>
+<?= $this->endSection() ?>

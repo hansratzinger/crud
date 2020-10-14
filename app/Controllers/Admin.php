@@ -4,7 +4,8 @@ class Admin extends BaseController
 {
 	public function index()
 	{
-		return view('admin/dashboard');
+		$data['title'] = 'Hello Admin';
+		return view('admin/dashboard',$data);
 	}
 
 	//--------------------------------------------------------------------

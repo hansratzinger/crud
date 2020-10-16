@@ -54,7 +54,7 @@ class CrudModel
                 else
                     $operator = "=";
 
-                $count_query .= " `$operator_arr[0]`$operator'" . $this->db->escape($value) . "' ";
+                $count_query .= " `$operator_arr[0]`$operator" . $this->db->escape($value) . " ";
                 $i++;
             }
             $count_query .= ")";

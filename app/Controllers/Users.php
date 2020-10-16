@@ -48,7 +48,7 @@ class Users extends BaseController
 
 		$per_page = 10;
 		$columns = ['u_id', 'u_firstname', 'u_lastname', 'u_email', 'u_status'];
-		$where = null;
+		$where = ['u_status' => 'Active'];
 		$order = [
 			['u_id', 'ASC']
 		] ;

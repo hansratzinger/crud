@@ -60,17 +60,25 @@ class Users extends BaseController
 
 	protected function field_options(){
 		$fields = [];
-
+		// die Reihenfolge der Felder in der Anzeige richtet sich NUR nach der Reihenfolge in der Datenbank und kann
+		// sonst nicht geändert werden / CRUD Tutorial #2 1:25 https://youtu.be/cFHEIjIsofo
 		$fields['u_id'] = ['label' => 'ID'];
 		$fields['u_firstname'] = ['label' => 'Vorname'];
 		$fields['u_lastname'] = ['label' => 'Familienname'];
 		$fields['u_email'] = ['label' => 'Email'];
-		$fields['u_status'] = ['label' => 'Status'];
+		$fields['u_status'] = ['label' => 'Status', 'type' => 'unset'];  // type => unset verhindert Anzeige des Feldes Status bei dieser form
+		$fields['u_created_at'] = ['label' => 'angelegt am','only_edit' =>true];
+		$fields['u_password'] = ['label' => 'Passwort','only_add' => true];  //only_add läßt nur bei der add form und nicht bei der edit form das feld erscheinen
 		
 
 		return $fields;
 	}
 
+	public function add(){
+		$data['form'] = $form = $this->crud->form();
+		$data['title'] = $this->crud->getAddTitle();
+		return view('admin/users/form', $data);
+	}
 	//--------------------------------------------------------------------
 
 }

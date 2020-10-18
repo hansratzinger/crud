@@ -63,13 +63,13 @@ class Users extends BaseController
 		// die Reihenfolge der Felder in der Anzeige richtet sich NUR nach der Reihenfolge in der Datenbank und kann
 		// sonst nicht geändert werden / CRUD Tutorial #2 1:25 https://youtu.be/cFHEIjIsofo
 		$fields['u_id'] = ['label' => 'ID'];
-		$fields['u_firstname'] = ['label' => 'Vorname'];
-		$fields['u_lastname'] = ['label' => 'Familienname'];
+		$fields['u_firstname'] = ['label' => 'Vorname', 'helper' => 'Vornamen eingeben', 'class' => 'col-12 col-sm-6]'];
+		$fields['u_lastname'] = ['label' => 'Familienname','helper' => 'Familiennamen eingeben', 'class' => 'col-12 col-sm-6]'];
 		$fields['u_email'] = ['label' => 'Email'];
 		$fields['u_status'] = ['label' => 'Status', 'type' => 'unset'];  // type => unset verhindert Anzeige des Feldes Status bei dieser form
 		$fields['u_created_at'] = ['label' => 'angelegt am','only_edit' =>true];
-		$fields['u_password'] = ['label' => 'Passwort','only_add' => true];  //only_add läßt nur bei der add form und nicht bei der edit form das feld erscheinen
-		
+		$fields['u_password'] = ['label' => 'Passwort','only_add' => true, 'type' => 'password', 'confirm' => true];  //only_add läßt nur bei der add form und nicht bei der edit form das feld erscheinen
+																								// confirm erstellt automatisch ein Bestätigungsfeld ür das Passwort
 
 		return $fields;
 	}

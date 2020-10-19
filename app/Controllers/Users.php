@@ -63,13 +63,18 @@ class Users extends BaseController
 		// die Reihenfolge der Felder in der Anzeige richtet sich NUR nach der Reihenfolge in der Datenbank und kann
 		// sonst nicht geändert werden / CRUD Tutorial #2 1:25 https://youtu.be/cFHEIjIsofo
 		$fields['u_id'] = ['label' => 'ID'];
-		$fields['u_firstname'] = ['label' => 'Vorname', 'helper' => 'Vornamen eingeben', 'class' => 'col-12 col-sm-6]'];
-		$fields['u_lastname'] = ['label' => 'Familienname','helper' => 'Familiennamen eingeben', 'class' => 'col-12 col-sm-6]'];
-		$fields['u_email'] = ['label' => 'Email'];
+		$fields['u_firstname'] = ['label' => 'Vorname',  'required' => true,  'helper' => 'Vornamen eingeben', 'class' => 'col-12 col-sm-6]'];
+		$fields['u_lastname'] = ['label' => 'Familienname', 'required' => true, 'helper' => 'Familiennamen eingeben', 'class' => 'col-12 col-sm-6]'];
+		$fields['u_email'] = ['label' => 'Email', 'unique' => [true, 'u_email'], 'required' => true];
 		$fields['u_status'] = ['label' => 'Status', 'type' => 'unset'];  // type => unset verhindert Anzeige des Feldes Status bei dieser form
 		$fields['u_created_at'] = ['label' => 'angelegt am','only_edit' =>true];
-		$fields['u_password'] = ['label' => 'Passwort','only_add' => true, 'type' => 'password', 'confirm' => true];  //only_add läßt nur bei der add form und nicht bei der edit form das feld erscheinen
-																								// confirm erstellt automatisch ein Bestätigungsfeld ür das Passwort
+		$fields['u_password'] = ['label' => 'Passwort',
+				'only_add' => true, 
+				'type' => 'password', 
+				'class' => 'col-12 col-sm-6',
+				'confirm' => true, 
+				'password_hash' => true ];  //only_add läßt nur bei der add form und nicht bei der edit form das feld erscheinen
+																										// confirm erstellt automatisch ein Bestätigungsfeld ür das Passwort
 
 		return $fields;
 	}
@@ -77,6 +82,27 @@ class Users extends BaseController
 	public function add(){
 		$data['form'] = $form = $this->crud->form();
 		$data['title'] = $this->crud->getAddTitle();
+		
+		if(is_array($form) && isset($form['redirect'])){
+			return redirect()->to($form['redirect']);
+		}
+		
+		return view('admin/users/form', $data);
+	}
+	
+	public function edit($id){
+
+		if(!$this->crud->current_values($id)){			// Eintrg nicht vorhanden
+			return redirect()->to($this->crud->getBase() . '/' . $this->crud->getTable());
+		}
+		$data['item_id'] = $id;
+		$data['form'] = $form = $this->crud->form();
+		$data['title'] = $this->crud->getAddTitle();
+		
+		if(is_array($form) && isset($form['redirect'])){
+			return redirect()->to($form['redirect']);
+		}
+		
 		return view('admin/users/form', $data);
 	}
 	//--------------------------------------------------------------------

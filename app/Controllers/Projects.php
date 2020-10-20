@@ -1,40 +1,30 @@
-<?php namespace App\Controllers;
+<?php
+
+namespace App\Controllers;
 
 use App\Libraries\Crud;
 
+
 class Projects extends BaseController
 {
-
 	protected $crud;
-		// $base = null, //prefix uri or parrent controller.
-		// $action = 'add',  //determine create or update // default is create (add)
-		// $table, //string
-		// $table_title, //string
-		// $form_title_add, //string
-		// $form_title_update, //string
-		// $form_submit, //string
-		// $form_submit_update, //string
-		// $fields = [], //array of field options: (type, required, label),
-		// $id,  //primary key value
-		// $id_field,  //primary key field
-		// $current_values, //will get current form values before updating
-		// $db, //db connection instance
-		// $model, //db connection instance
-		// $request;
-		//
-	function __construct () {
+
+	function __construct()
+	{
 		$params = [
 			'table' => 'projects',
 			'dev' => false,
 			'fields' => $this->field_options(),
 			'form_title_add' => 'Add Project',
+			'form_title_update' => 'Edit Project',
 			'form_submit' => 'Add',
 			'table_title' => 'Projects',
 			'form_submit_update' => 'Update',
 			'base' => '',
+
 		];
 
-		$this->crud  = new Crud($params, service('request'));
+		$this->crud = new Crud($params, service('request'));
 	}
 
 	public function index()
@@ -47,68 +37,58 @@ class Projects extends BaseController
 
 		$data['title'] = $this->crud->getTableTitle();
 
-		$per_page = 10;
-		$columns = [];
-		// $where = ['u_status' => 'Active']; nur aktives Project anzeigen
-		$where = null;
+		$per_page = 20;
+		$columns = ['p_id', 'p_uid', 'p_title', 'p_price', 'tags', 'p_start_date', 'p_end_date', 'p_status',];
+		$where = null;//['u_status =' => 'Active'];
 		$order = [
 			['p_id', 'ASC']
-		] ;
-
-	
+		];
 		$data['table'] = $this->crud->view($page, $per_page, $columns, $where, $order);
 		return view('admin/projects/table', $data);
 	}
 
-	protected function field_options(){
-		$fields = [];
-		$fields['p_description'] = ['label' => 'Beschreibung', 'type' => 'editor'];
-		// die Reihenfolge der Felder in der Anzeige richtet sich NUR nach der Reihenfolge in der Datenbank und kann
-		// sonst nicht geändert werden / CRUD Tutorial #2 1:25 https://youtu.be/cFHEIjIsofo
-		// $fields['u_id'] = ['label' => 'ID'];
-		// $fields['u_firstname'] = ['label' => 'Vorname',  'required' => true,  'helper' => 'Vornamen eingeben', 'class' => 'col-12 col-sm-6]'];
-		// $fields['u_lastname'] = ['label' => 'Familienname', 'required' => true, 'helper' => 'Familiennamen eingeben', 'class' => 'col-12 col-sm-6]'];
-		// $fields['u_email'] = ['label' => 'Email', 'unique' => [true, 'u_email'], 'required' => true];
-		// // $fields['u_status'] = ['label' => 'Status', 'type' => 'unset'];  // type => unset verhindert Anzeige des Feldes Status bei dieser form
-		// $fields['u_status'] = ['label' => 'Status']; 
-		// $fields['u_created_at'] = ['label' => 'angelegt am','only_edit' =>true];
-		// $fields['u_password'] = ['label' => 'Passwort',
-		// 		'only_add' => true, 
-		// 		'type' => 'password', 
-		// 		'class' => 'col-12 col-sm-6',
-		// 		'confirm' => true, 
-		// 		'password_hash' => true ];  //only_add läßt nur bei der add form und nicht bei der edit form das feld erscheinen
-		// 																								// confirm erstellt automatisch ein Bestätigungsfeld ür das Passwort
+	public function add(){
+		
+		$data['form'] = $form = $this->crud->form();
+		$data['title'] = $this->crud->getAddTitle();
 
+		if(is_array($form) && isset($form['redirect']))
+			return redirect()->to($form['redirect']);
+
+		return view('admin/projects/form', $data);
+	}
+
+	public function edit($id)
+	{
+		if(!$this->crud->current_values($id))
+			return redirect()->to($this->crud->getBase() . '/' . $this->crud->getTable());
+
+			$data['item_id'] = $id;
+		$data['form'] = $form = $this->crud->form();
+		$data['title'] = $this->crud->getEditTitle();
+
+		if (is_array($form) && isset($form['redirect']))
+			return redirect()->to($form['redirect']);
+		
+		return view('admin/projects/form', $data);
+	}
+
+
+	protected function field_options()
+	{
+		$fields = [];
+		$fields['p_id'] = ['label' => 'ID'];
+		$fields['p_description'] = ['label' => 'Description', 'type' => 'editor'];
+		$fields['p_start_date'] = ['label' => 'Starts at', 'required' => true, 'class' => 'col-12 col-sm-6'];
+		$fields['p_end_date'] = ['label' => 'Ends at', 'required' => true, 'class' => 'col-12 col-sm-6'];
+		$fields['p_title'] = ['label' => 'Title', 'required' => true];
+		$fields['p_status'] = ['label' => 'Status', 'required' => true, 'class' => 'col-12 col-sm-6'];
+		$fields['p_price'] = ['label' => 'Price', 'required' => true, 'class' => 'col-12 col-sm-6'];
+		$fields['p_created_at'] = ['type' => 'unset'];
+		$fields['p_updated_at'] = ['type' => 'unset'];
 		return $fields;
 	}
 
-	public function add(){
-		$data['form'] = $form = $this->crud->form();
-		$data['title'] = $this->crud->getAddTitle();
-		
-		if(is_array($form) && isset($form['redirect'])){
-			return redirect()->to($form['redirect']);
-		}
-		
-		return view('admin/projects/form', $data);
-	}
-	
-	public function edit($id){
-
-		if(!$this->crud->current_values($id)){			// Eintrg nicht vorhanden
-			return redirect()->to($this->crud->getBase() . '/' . $this->crud->getTable());
-		}
-		$data['item_id'] = $id;
-		$data['form'] = $form = $this->crud->form();
-		$data['title'] = $this->crud->getEditTitle();
-		
-		if(is_array($form) && isset($form['redirect'])){
-			return redirect()->to($form['redirect']);
-		}
-		
-		return view('admin/projects/form', $data);
-	}
 	//--------------------------------------------------------------------
 
 }

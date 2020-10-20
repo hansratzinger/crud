@@ -21,6 +21,7 @@ class Users extends BaseController
 		// $db, //db connection instance
 		// $model, //db connection instance
 		// $request;
+		//
 	function __construct () {
 		$params = [
 			'table' => 'users',

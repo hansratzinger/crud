@@ -101,6 +101,9 @@ class Crud_core
             //This $_POST['form'] is just to check if the $_POST values are from
             // form submition and not search or something else
             unset($post['form']);
+            if(isset ($post['files'])){
+                unset($post['files']);
+            }
             //Create rules
             $novalidation = true;
             $this->validator = service('validation');
@@ -562,7 +565,7 @@ class Crud_core
         $input = '<textarea  id="' . $field_type . '"   name="' . $field_type . '"  class="form-control" rows="5" ' . $required . ' placeholder="">' . set_value($field_type, (isset($this->current_values->{$field_type}) ? $this->current_values->{$field_type} : '')) . '</textarea>';
         return $this->input_wrapper($field_type, $label, $input, $required);
     }
-    protected function field_editor($field_type, $label, $field_params)
+    protected function field_editor($field_type, $label, $field_params)   // Editor script SUMMERNOTE  tutorial #2 1:24:00   HR 2020-10-20 NK
     {
         $rand_number = mt_rand(1545645, 15456546);
         $rid = $field_type . '_' . $rand_number;
@@ -571,6 +574,7 @@ class Crud_core
         $input .= '
     <script>$(document).ready(function() {
       $("#' . $rid . '").summernote({
+          height: 150,
         toolbar: [
           [\'style\', [\'style\',\'bold\', \'italic\', \'underline\', \'clear\']],
           [\'font\', [\'strikethrough\']],

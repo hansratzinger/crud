@@ -13,7 +13,7 @@ class Projects extends BaseController
 	{
 		$params = [
 			'table' => 'projects',
-			'dev' => false,
+			'dev' => false,			//true - Show MySQL schema
 			'fields' => $this->field_options(),
 			'form_title_add' => 'Add Project',
 			'form_title_update' => 'Edit Project',

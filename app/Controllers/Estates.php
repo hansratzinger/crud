@@ -5,20 +5,20 @@ namespace App\Controllers;
 use App\Libraries\Crud;
 
 
-class Objects extends BaseController
+class Estates extends BaseController
 {
 	protected $crud;
 
 	function __construct()
 	{
 		$params = [
-			'table' => 'objects',
+			'table' => 'estates',
 			'dev' => false,			//true - Show MySQL schema
 			'fields' => $this->field_options(),
 			'form_title_add' => 'Add Project',
 			'form_title_update' => 'Edit Project',
 			'form_submit' => 'Add',
-			'table_title' => 'Objects',
+			'table_title' => 'Estates',
 			'form_submit_update' => 'Update',
 			'base' => '',
 
@@ -39,31 +39,31 @@ class Objects extends BaseController
 
 		$per_page = 20;
 		$columns = [
-			'o_id',
-			'o_name',
-			'o_street',
-			'o_house_numer',
-			'o_block',
-			'o_door_number',
-			'o_zip',
-			'o_town',
-			'o_country',
-			'o_description',
-			'o_willhaben_title',
-			'o_willhaben_url',
-			'o_website_url',
-			'o_matterport_url',
-			'o_created_at',
-			'o_updated_at',
-			'o_deleted_at',
-			'o_status'
+			'est_id',
+			'est_name',
+			'est_street',
+			'est_house_numer',
+			'est_block',
+			'est_door_number',
+			'est_zip',
+			'est_town',
+			'est_country',
+			'est_description',
+			'est_willhaben_title',
+			'est_willhaben_url',
+			'est_website_url',
+			'est_matterport_url',
+			'est_created_at',
+			'est_updated_at',
+			'est_deleted_at',
+			'est_status'
 			];
 		$where = null;//['u_status =' => 'Active'];
 		$order = [
-			['o_id', 'DESC']
+			['est_id', 'DESC']
 		];
 		$data['table'] = $this->crud->view($page, $per_page, $columns, $where, $order);
-		return view('admin/objects/table', $data);
+		return view('admin/estates/table', $data);
 	}
 
 	public function add(){
@@ -74,7 +74,7 @@ class Objects extends BaseController
 		if(is_array($form) && isset($form['redirect']))
 			return redirect()->to($form['redirect']);
 
-		return view('admin/objects/form', $data);
+		return view('admin/estates/form', $data);
 	}
 
 	public function edit($id)
@@ -89,23 +89,23 @@ class Objects extends BaseController
 		if (is_array($form) && isset($form['redirect']))
 			return redirect()->to($form['redirect']);
 		
-		return view('admin/objects/form', $data);
+		return view('admin/estates/form', $data);
 	}
 
 
 	protected function field_options()
 	{
 		$fields = [];
-		$fields['o_id'] = ['label' => 'ID'];
-		$fields['o_id'] = [
-			'label' => 'Object',
+		$fields['est_id'] = ['label' => 'Objekt-ID'];
+		$fields['est_id'] = [
+			'label' => 'Estate',
 			'required' => true,
 			'type' => 'dropdown',
 			'relation' => [
-				'table' => 'objects',
+				'table' => 'estates',
 				'primary_key' => 'u_id',
 				'display' => ['u_name','u_description'],
-				'order_by' => 'o_id',
+				'order_by' => 'est_id',
 				'order' => 'ASC'
 				],
 			
@@ -116,8 +116,8 @@ class Objects extends BaseController
 			//'type' => 'multiselect',			//oder 
 			'type' => 'checkboxes', //  #tutorial 34:05
 			'relation' => [
-				'save_table' => 'object_tags',
-				'parent_field' => 'pt_object_id',
+				'save_table' => 'estate_tags',
+				'parent_field' => 'pt_estate_id',
 				'child_field' => 'pt_tag_id',
 				'inner_class' => 'col-6 col-sm-3',  //  wenn 'type' => 'checkboxes'   #tutorial 34:05
 				'table' => 'tags',
@@ -127,15 +127,15 @@ class Objects extends BaseController
 				'order' => 'ASC'
 				],
 			
-			];  // mit der Angabe 'relation' wird das 'object'-table mit 'users'-table verknüpft  HR 21.10.20 NK  #3 tutorial 8:25
-		$fields['o_description'] = ['label' => 'Description', 'type' => 'editor'];
-		$fields['o_start_date'] = ['label' => 'Starts at', 'required' => true, 'class' => 'col-12 col-sm-6'];
-		$fields['o_end_date'] = ['label' => 'Ends at', 'required' => true, 'class' => 'col-12 col-sm-6'];
-		$fields['o_title'] = ['label' => 'Title', 'required' => true];
-		$fields['o_status'] = ['label' => 'Status', 'required' => true, 'class' => 'col-12 col-sm-6'];
-		$fields['o_price'] = ['label' => 'Price', 'required' => true, 'class' => 'col-12 col-sm-6'];
-		$fields['o_created_at'] = ['type' => 'unset'];
-		$fields['o_updated_at'] = ['type' => 'unset'];
+			];  // mit der Angabe 'relation' wird das 'estates'-table mit 'users'-table verknüpft  HR 21.10.20 NK  #3 tutorial 8:25
+		$fields['est_description'] = ['label' => 'Description', 'type' => 'editor'];
+		$fields['est_start_date'] = ['label' => 'Starts at', 'required' => true, 'class' => 'col-12 col-sm-6'];
+		$fields['est_end_date'] = ['label' => 'Ends at', 'required' => true, 'class' => 'col-12 col-sm-6'];
+		$fields['est_title'] = ['label' => 'Title', 'required' => true];
+		$fields['est_status'] = ['label' => 'Status', 'required' => true, 'class' => 'col-12 col-sm-6'];
+		$fields['est_price'] = ['label' => 'Price', 'required' => true, 'class' => 'col-12 col-sm-6'];
+		$fields['est_created_at'] = ['type' => 'unset'];
+		$fields['est_updated_at'] = ['type' => 'unset'];
 		return $fields;
 	}
 

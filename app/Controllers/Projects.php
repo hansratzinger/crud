@@ -13,7 +13,7 @@ class Projects extends BaseController
 	{
 		$params = [
 			'table' => 'projects',
-			'dev' => false,			//true - Show MySQL schema
+			'dev' => false,
 			'fields' => $this->field_options(),
 			'form_title_add' => 'Add Project',
 			'form_title_update' => 'Edit Project',
@@ -78,43 +78,12 @@ class Projects extends BaseController
 	{
 		$fields = [];
 		$fields['p_id'] = ['label' => 'ID'];
-		$fields['p_uid'] = [
-			'label' => 'User',
-			'required' => true,
-			'type' => 'dropdown',
-			'relation' => [
-				'table' => 'users',
-				'primary_key' => 'u_id',
-				'display' => ['u_firstname','u_lastname'],
-				'order_by' => 'u_firstname',
-				'order' => 'ASC'
-				],
-			
-			]; 
-		$fields['tags'] = [
-			'label' => 'Tags',
-			'required' => true,
-			//'type' => 'multiselect',			//oder 
-			'type' => 'checkboxes', //  #tutorial 34:05
-			'relation' => [
-				'save_table' => 'project_tags',
-				'parent_field' => 'pt_project_id',
-				'child_field' => 'pt_tag_id',
-				'inner_class' => 'col-6 col-sm-3',  //  wenn 'type' => 'checkboxes'   #tutorial 34:05
-				'table' => 'tags',
-				'primary_key' => 't_id',
-				'display' => ['t_name'],
-				'order_by' => 't_name',
-				'order' => 'ASC'
-				],
-			
-			];  // mit der Angabe 'relation' wird das 'project'-table mit 'users'-table verknüpft  HR 21.10.20 NK  #3 tutorial 8:25
 		$fields['p_description'] = ['label' => 'Description', 'type' => 'editor'];
-		$fields['p_start_date'] = ['label' => 'Starts at', 'required' => true, 'class' => 'col-12 col-sm-6'];
-		$fields['p_end_date'] = ['label' => 'Ends at', 'required' => true, 'class' => 'col-12 col-sm-6'];
-		$fields['p_title'] = ['label' => 'Title', 'required' => true];
-		$fields['p_status'] = ['label' => 'Status', 'required' => true, 'class' => 'col-12 col-sm-6'];
-		$fields['p_price'] = ['label' => 'Price', 'required' => true, 'class' => 'col-12 col-sm-6'];
+		$fields['p_start_date'] = ['label' => 'Starts at', 'required' => 'true', 'class' => 'col-12 col-sm-6'];
+		$fields['p_end_date'] = ['label' => 'Ends at', 'required' => 'true', 'class' => 'col-12 col-sm-6'];
+		$fields['p_title'] = ['label' => 'Title', 'required' => 'true'];
+		$fields['p_status'] = ['label' => 'Status', 'required' => 'true', 'class' => 'col-12 col-sm-6'];
+		$fields['p_price'] = ['label' => 'Price', 'required' => 'true', 'class' => 'col-12 col-sm-6'];
 		$fields['p_created_at'] = ['type' => 'unset'];
 		$fields['p_updated_at'] = ['type' => 'unset'];
 		return $fields;

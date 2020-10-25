@@ -118,13 +118,13 @@ class Estates extends BaseController
 			'required' => true,
 			'type' => 'dropdown',
 			'relation' => [
-				'table' => 'estates',
-				'primary_key' => 'est_id',
-				'display' => ['est_name','est_description'],
-				'order_by' => 'est_id',
-				'order' => 'ASC'
+			'table' => 'tags',
+			'primary_key' => 't_id',
+			'display' => ['est_name','est_description'],
+			'order_by' => 'est_id',
+			'order' => 'ASC'
 				],
-			
+		
 			]; 
 		$fields['tags'] = [
 			'label' => 'Tags',
@@ -133,8 +133,8 @@ class Estates extends BaseController
 			'type' => 'checkboxes', //  #3 tutorial 34:05
 			'relation' => [
 				'save_table' => 'estate_tags',
-				'parent_field' => 'et_estate_id',
-				'child_field' => 'et_tag_id',
+				'parent_field' => 'est_id',
+				'child_field' => 't_id',
 				'inner_class' => 'col-6 col-sm-3',  //  wenn 'type' => 'checkboxes'   #tutorial 34:05
 				'table' => 'tags',
 				'primary_key' => 't_id',
@@ -143,12 +143,12 @@ class Estates extends BaseController
 				'order' => 'ASC'
 				]			
 			];  // mit der Angabe 'relation' wird das 'estates'-table mit 'users'-table verknüpft  HR 21.10.20 NK  #3 tutorial 8:25
-		$fields['est_description'] = ['label' => 'Description', 'type' => 'editor'];
-		$fields['est_start_date'] = ['label' => 'Starts at', 'required' => true, 'class' => 'col-12 col-sm-6'];
-		$fields['est_end_date'] = ['label' => 'Ends at', 'required' => true, 'class' => 'col-12 col-sm-6'];
+		$fields['est_description'] = ['label' => 'Description', 'type' => 'editor','class' => 'col-sm-6]'];
+		$fields['est_start_date'] = ['label' => 'Starts at', 'required' => true, 'class' => 'col-sm-6'];
+		$fields['est_end_date'] = ['label' => 'Ends at', 'required' => true, 'class' => 'col-sm-6'];
 		$fields['est_title'] = ['label' => 'Title', 'required' => true];
-		$fields['est_status'] = ['label' => 'Status', 'required' => true, 'class' => 'col-12 col-sm-6'];
-		$fields['est_price'] = ['label' => 'Price', 'required' => true, 'class' => 'col-12 col-sm-6'];
+		$fields['est_status'] = ['label' => 'Status', 'required' => true, 'class' => 'col-sm-6'];
+		$fields['est_price'] = ['label' => 'Price', 'required' => true, 'class' => 'col-sm-6'];
 		$fields['est_created_at'] = ['type' => 'unset'];
 		$fields['est_updated_at'] = ['type' => 'unset'];
 		return $fields;

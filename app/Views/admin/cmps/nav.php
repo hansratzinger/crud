@@ -16,9 +16,9 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="/projects" class="nav-link <?= $request->uri->getSegment(1) == 'projects' ? 'active' : null; ?>">
+            <a href="/estates" class="nav-link <?= $request->uri->getSegment(1) == 'estates' ? 'active' : null; ?>">
                 <i class="nav-icon fas fa-cubes"></i>
-                <p>Projects</p>
+                <p>Estates</p>
             </a>
         </li>
         <li class="nav-item">

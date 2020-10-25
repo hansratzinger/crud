@@ -115,15 +115,15 @@ class Estates extends BaseController
 		
 		$fields['est_id'] = [
 			'label' => 'Objekt-ID',
-			'required' => true,
-			'type' => 'dropdown',
-			'relation' => [
-			'table' => 'tags',
-			'primary_key' => 't_id',
-			'display' => ['est_name','est_description'],
-			'order_by' => 'est_id',
-			'order' => 'ASC'
-				],
+			// 'required' => true,
+			// 'type' => 'dropdown',
+			// 'relation' => [
+			// 'table' => 'tags',
+			// 'primary_key' => 't_id',
+			// 'display' => ['est_name','est_description'],
+			// 'order_by' => 'est_id',
+			// 'order' => 'ASC'
+			// 	],
 		
 			]; 
 		$fields['tags'] = [

@@ -48,7 +48,7 @@ class Users extends BaseController
 		$data['title'] = $this->crud->getTableTitle();
 
 		$per_page = 10;
-		$columns = ['u_id', 'u_firstname', 'u_lastname', 'u_email', 'u_status'];
+		$columns = ['u_id','u_lastname', 'u_firstname', 'u_academic_degree' ,'u_email', 'u_phone'];
 		// $where = ['u_status' => 'Active']; nur aktive User anzeigen
 		$where = null;
 		$order = [

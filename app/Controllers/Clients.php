@@ -7,7 +7,8 @@ class Clients extends BaseController
 
 	protected $crud;
 
-	function __construct () {
+	function __construct () 
+	{
 		$params = [
 			'table' => 'clients',
 			'dev' => false,
@@ -50,7 +51,7 @@ class Clients extends BaseController
 
 		$fields['cli_id'] = ['label' => 'Client-ID'];
 		$fields['tags'] = [
-			'label' => 'Clienttags',
+			'label' => 'Tags',
 			'required' => false,
 			'type' => 'checkboxes',
 			'relation' => [
@@ -60,7 +61,7 @@ class Clients extends BaseController
 				'inner_class' => 'col-6 col-sm-3',
 				'table' => 'clienttags',
 				'primary_key' => 'ct_id',
-				'display' => ['ct_name'],
+				'display' => 'ct_name',
 				'order_by' => 'ct_name',
 				'order' => 'ASC'
 			]

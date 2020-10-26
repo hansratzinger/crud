@@ -16,7 +16,7 @@ class Estates extends BaseController
 			'dev' => false,			//true - Show MySQL schema
 			'fields' => $this->field_options(),
 			'form_title_add' => 'Add Estate',
-			'form_title_update' => 'Edit Estate',
+			// 'form_title_update' => 'Edit Estate',
 			'form_submit' => 'Add',
 			'table_title' => 'Estates',
 			'form_submit_update' => 'Update',
@@ -82,8 +82,41 @@ class Estates extends BaseController
 		return view('admin/estates/table', $data);
 	}
 
-	public function add(){
+	protected function field_options()
+	{
+		$fields = [];
 		
+		$fields['est_id'] = [
+			'label' => 'Objekt-ID',
+			// 'inner_class' => 'col-6 col-sm-3'	
+			]; 
+				
+		// $fields['tags'] = [
+		// 	'label' => 'Features',
+		// 	'required' => false,
+		// 	'type' => 'checkboxes',
+		// 	'relation' => [
+		// 		'save_table' => 'estate_tags_relations',
+		// 		'parent_field' => 'et_est_id',
+		// 		'child_field' => 'et_t_id',
+		// 		'inner_class' => 'col-6 col-sm-3',  //  wenn 'type' => 'checkboxes'   #tutorial 34:05
+		// 		'table' => 'tags',
+		// 		'primary_key' => 't_id',
+		// 		'display' => 't_name',
+		// 		'order_by' => 't_name',
+		// 		'order' => 'ASC'
+		// 		]			
+		// 	];
+		$fields['est_description'] = ['label' => 'Description', 'type' => 'editor','class' => 'col-sm-6]'];
+		$fields['est_title'] = ['label' => 'Title', 'required' => true];
+		$fields['est_status'] = ['label' => 'Status', 'required' => true, 'class' => 'col-sm-6'];
+		$fields['est_price'] = ['label' => 'Price', 'required' => true, 'class' => 'col-sm-6'];
+		
+		return $fields;
+	}
+	
+
+	public function add(){
 		$data['form'] = $form = $this->crud->form();
 		$data['title'] = $this->crud->getAddTitle();
 
@@ -107,40 +140,5 @@ class Estates extends BaseController
 		
 		return view('admin/estates/form', $data);
 	}
-
-
-	protected function field_options()
-	{
-		$fields = [];
-		
-		$fields['est_id'] = [
-			'label' => 'Objekt-ID',
-			'inner_class' => 'col-6 col-sm-3'	
-			]; 
-				
-		$fields['tags'] = [
-			'label' => 'Features',
-			'required' => true,
-			'type' => 'checkboxes',
-			'relation' => [
-				'save_table' => 'estate_tags',
-				'parent_field' => 'et_est_id',
-				'child_field' => 'et_t_id',
-				'inner_class' => 'col-6 col-sm-3',  //  wenn 'type' => 'checkboxes'   #tutorial 34:05
-				'table' => 'tags',
-				'primary_key' => 't_id',
-				'display' => ['t_name'],
-				'order_by' => 't_name',
-				'order' => 'ASC'
-				]			
-			];
-		$fields['est_description'] = ['label' => 'Description', 'type' => 'editor','class' => 'col-sm-6]'];
-		$fields['est_title'] = ['label' => 'Title', 'required' => true];
-		$fields['est_status'] = ['label' => 'Status', 'required' => true, 'class' => 'col-sm-6'];
-		$fields['est_price'] = ['label' => 'Price', 'required' => true, 'class' => 'col-sm-6'];
-		return $fields;
-	}
-
-	//--------------------------------------------------------------------
-
 }
+//--------------------------------------------------------------------

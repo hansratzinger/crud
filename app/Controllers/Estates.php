@@ -98,7 +98,7 @@ class Estates extends BaseController
 		if(!$this->crud->current_values($id))
 			return redirect()->to($this->crud->getBase() . '/' . $this->crud->getTable());
 
-			$data['item_id'] = $id;
+		$data['item_id'] = $id;
 		$data['form'] = $form = $this->crud->form();
 		$data['title'] = $this->crud->getEditTitle();
 
@@ -115,26 +115,17 @@ class Estates extends BaseController
 		
 		$fields['est_id'] = [
 			'label' => 'Objekt-ID',
-			// 'required' => true,
-			// 'type' => 'dropdown',
-			// 'relation' => [
-			// 'table' => 'tags',
-			// 'primary_key' => 't_id',
-			// 'display' => ['est_name','est_description'],
-			// 'order_by' => 'est_id',
-			// 'order' => 'ASC'
-			// 	],
-		
+			'inner_class' => 'col-6 col-sm-3'	
 			]; 
+				
 		$fields['tags'] = [
-			'label' => 'Tags',
+			'label' => 'Features',
 			'required' => true,
-			//'type' => 'multiselect',			//oder 
-			'type' => 'checkboxes', //  #3 tutorial 34:05
+			'type' => 'checkboxes',
 			'relation' => [
 				'save_table' => 'estate_tags',
-				'parent_field' => 'est_id',
-				'child_field' => 't_id',
+				'parent_field' => 'et_est_id',
+				'child_field' => 'et_t_id',
 				'inner_class' => 'col-6 col-sm-3',  //  wenn 'type' => 'checkboxes'   #tutorial 34:05
 				'table' => 'tags',
 				'primary_key' => 't_id',
@@ -142,15 +133,11 @@ class Estates extends BaseController
 				'order_by' => 't_name',
 				'order' => 'ASC'
 				]			
-			];  // mit der Angabe 'relation' wird das 'estates'-table mit 'users'-table verknüpft  HR 21.10.20 NK  #3 tutorial 8:25
+			];
 		$fields['est_description'] = ['label' => 'Description', 'type' => 'editor','class' => 'col-sm-6]'];
-		$fields['est_start_date'] = ['label' => 'Starts at', 'required' => true, 'class' => 'col-sm-6'];
-		$fields['est_end_date'] = ['label' => 'Ends at', 'required' => true, 'class' => 'col-sm-6'];
 		$fields['est_title'] = ['label' => 'Title', 'required' => true];
 		$fields['est_status'] = ['label' => 'Status', 'required' => true, 'class' => 'col-sm-6'];
 		$fields['est_price'] = ['label' => 'Price', 'required' => true, 'class' => 'col-sm-6'];
-		$fields['est_created_at'] = ['type' => 'unset'];
-		$fields['est_updated_at'] = ['type' => 'unset'];
 		return $fields;
 	}
 

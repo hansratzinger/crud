@@ -65,12 +65,13 @@ class Users extends BaseController
 		// die Reihenfolge der Felder in der Anzeige richtet sich NUR nach der Reihenfolge in der Datenbank und kann
 		// sonst nicht geändert werden / CRUD Tutorial #2 1:25 https://youtu.be/cFHEIjIsofo
 		$fields['u_id'] = ['label' => 'ID'];
-		$fields['u_firstname'] = ['label' => 'Vorname',  'required' => true,  'helper' => 'Vornamen eingeben', 'class' => 'col-12 col-sm-6]'];
-		$fields['u_lastname'] = ['label' => 'Familienname', 'required' => true, 'helper' => 'Familiennamen eingeben', 'class' => 'col-12 col-sm-6]'];
-		$fields['u_email'] = ['label' => 'Email', 'unique' => [true, 'u_email'], 'required' => true];
+		$fields['u_firstname'] = ['label' => 'Vorname',  'required' => true,  'helper' => 'Vornamen eingeben', 'class' => 'col-4 col-sm-4'];
+		$fields['u_lastname'] = ['label' => 'Familienname', 'required' => true, 'helper' => 'Familiennamen eingeben', 'class' => 'col-4 col-sm-4'];
+		$fields['u_academic_degree'] = ['label' => 'akad.Titel', 'class' => 'col-4 col-sm-4'];
+		$fields['u_email'] = ['label' => 'Email', 'unique' => [true, 'u_email'],'class' => 'col-6 col-sm-6', 'required' => true];
 		// $fields['u_status'] = ['label' => 'Status', 'type' => 'unset'];  // type => unset verhindert Anzeige des Feldes Status bei dieser form
-		$fields['u_status'] = ['label' => 'Status']; 
-		$fields['u_created_at'] = ['label' => 'angelegt am','only_edit' =>true];
+		$fields['u_status'] = ['label' => 'Status','class' => 'col-6 col-sm-6']; 
+		$fields['u_created_at'] = ['label' => 'angelegt am','only_edit' =>true,'class' => 'col-6 col-sm-6'];
 		$fields['u_password'] = ['label' => 'Passwort',
 				'only_add' => true, 
 				'type' => 'password', 

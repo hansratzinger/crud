@@ -2,19 +2,19 @@
 
 use App\Libraries\Crud;
 
-class Tags extends BaseController
+class Clienttags extends BaseController
 {
 
 	protected $crud;
 
 	function __construct () {
 		$params = [
-			'table' => 'tags',
+			'table' => 'clienttags',
 			'dev' => false,
 			'fields' => $this->field_options(),
 			'form_title_add' => 'Add Tag',
 			'form_submit' => 'Add',
-			'table_title' => 'Tags',
+			'table_title' => 'Clienttags',
 			'form_submit_update' => 'Update',
 			'base' => '',
 		];
@@ -33,24 +33,24 @@ class Tags extends BaseController
 		$data['title'] = $this->crud->getTableTitle();
 
 		$per_page = 10;
-		$columns = ['t_id', 't_name'];
+		$columns = ['ct_id', 'ct_name'];
 		// $where = ['t_status' => 'Active']; nur aktive Tag anzeigen
 		$where = null;
 		$order = [
-			['t_name', 'ASC']
+			['ct_name', 'ASC']
 		] ;
 
 	
 		$data['table'] = $this->crud->view($page, $per_page, $columns, $where, $order);
-		return view('admin/tags/table', $data);
+		return view('admin/clienttags/table', $data);
 	}
 
 	protected function field_options(){
 		$fields = [];
 		// die Reihenfolge der Felder in der Anzeige richtet sich NUR nach der Reihenfolge in der Datenbank und kann
 		// sonst nicht geändert werden / CRUD Tutorial #2 1:25 https://youtu.be/cFHEIjIsofo
-		$fields['t_id'] = ['label' => 'ID'];
-		$fields['t_name'] = ['label' => 'Bezeichnung',  'required' => true,  'helper' => 'Bezeichnung eingeben', 'class' => 'col-12 col-sm-6]'];
+		$fields['ct_id'] = ['label' => 'ID'];
+		$fields['ct_name'] = ['label' => 'Bezeichnung',  'required' => true,  'helper' => 'Bezeichnung eingeben', 'class' => 'col-12 col-sm-6]'];
 
 		return $fields;
 	}
@@ -63,7 +63,7 @@ class Tags extends BaseController
 			return redirect()->to($form['redirect']);
 		}
 		
-		return view('admin/tags/form', $data);
+		return view('admin/clienttags/form', $data);
 	}
 	
 	public function edit($id){
@@ -79,7 +79,7 @@ class Tags extends BaseController
 			return redirect()->to($form['redirect']);
 		}
 		
-		return view('admin/tags/form', $data);
+		return view('admin/clienttags/form', $data);
 	}
 	//--------------------------------------------------------------------
 

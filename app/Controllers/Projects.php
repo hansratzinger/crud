@@ -61,7 +61,8 @@ class Projects extends BaseController
 	public function edit($id)
 	{
 		if(!$this->crud->current_values($id))
-			return redirect()->to($this->crud->getBase() . '/' . $this->crud->getTable());
+			return redirect()->to($this->crud->getBase() . '/'
+			 . $this->crud->getTable())	;
 
 			$data['item_id'] = $id;
 		$data['form'] = $form = $this->crud->form();

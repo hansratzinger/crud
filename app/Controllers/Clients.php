@@ -2,19 +2,19 @@
 
 use App\Libraries\Crud;
 
-class Tags extends BaseController
+class Clients extends BaseController
 {
 
 	protected $crud;
 
 	function __construct () {
 		$params = [
-			'table' => 'tags',
+			'table' => 'clients',
 			'dev' => false,
 			'fields' => $this->field_options(),
-			'form_title_add' => 'Add Tag',
+			'form_title_add' => 'Add Client',
 			'form_submit' => 'Add',
-			'table_title' => 'Tags',
+			'table_title' => 'Clients',
 			'form_submit_update' => 'Update',
 			'base' => '',
 		];
@@ -33,24 +33,30 @@ class Tags extends BaseController
 		$data['title'] = $this->crud->getTableTitle();
 
 		$per_page = 10;
-		$columns = ['t_id', 't_name'];
+		$columns = ['cli_id', 'cli_last_name', 'cli_first_name'];
 		// $where = ['t_status' => 'Active']; nur aktive Tag anzeigen
 		$where = null;
 		$order = [
-			['t_name', 'ASC']
+			['cli_last_name', 'ASC']
 		] ;
 
 	
 		$data['table'] = $this->crud->view($page, $per_page, $columns, $where, $order);
-		return view('admin/tags/table', $data);
+		return view('admin/clients/table', $data);
 	}
 
 	protected function field_options(){
 		$fields = [];
-		// die Reihenfolge der Felder in der Anzeige richtet sich NUR nach der Reihenfolge in der Datenbank und kann
-		// sonst nicht geändert werden / CRUD Tutorial #2 1:25 https://youtu.be/cFHEIjIsofo
-		$fields['t_id'] = ['label' => 'ID'];
-		$fields['t_name'] = ['label' => 'Bezeichnung',  'required' => true,  'helper' => 'Bezeichnung eingeben', 'class' => 'col-12 col-sm-6]'];
+
+		$fields['cli_id'] = ['label' => 'Client-ID'];
+		$fields['cli_first_name'] = ['label' => 'Vorname',  'required' => true,  'helper' => 'Vornamen eingeben', 'class' => 'col-4 col-sm-4'];
+		$fields['cli_last_name'] = ['label' => 'Familienname',  'required' => true,  'helper' => 'Vornamen eingeben', 'class' => 'col-4 col-sm-4'];
+		$fields['cli_academic_degree'] = ['label' => 'akad. Titel',   'class' => 'col-4 col-sm-4'];
+		$fields['cli_email'] = ['label' => 'Email',  'required' => true, 'class' => 'col-3 col-sm-3'];
+		$fields['cli_phone'] = ['label' => 'Telefon',  'required' => true, 'class' => 'col-3 col-sm-3'];
+		$fields['cli_street'] = ['label' => 'Strasse',  'required' => true, 'class' => 'col-4 col-sm-4'];
+		$fields['cli_zip'] = ['label' => 'PLZ',  'required' => true, 'class' => 'col-3 col-sm-3'];
+		$fields['cli_town'] = ['label' => 'Ort',  'required' => true, 'class' => 'col-3 col-sm-3'];
 
 		return $fields;
 	}
@@ -63,7 +69,7 @@ class Tags extends BaseController
 			return redirect()->to($form['redirect']);
 		}
 		
-		return view('admin/tags/form', $data);
+		return view('admin/clients/form', $data);
 	}
 	
 	public function edit($id){
@@ -79,7 +85,7 @@ class Tags extends BaseController
 			return redirect()->to($form['redirect']);
 		}
 		
-		return view('admin/tags/form', $data);
+		return view('admin/clients/form', $data);
 	}
 	//--------------------------------------------------------------------
 

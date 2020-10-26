@@ -49,6 +49,23 @@ class Clients extends BaseController
 		$fields = [];
 
 		$fields['cli_id'] = ['label' => 'Client-ID'];
+		$fields['tags'] = [
+			'label' => 'Clienttags',
+			'required' => false,
+			'type' => 'checkboxes',
+			'relation' => [
+				'save_table' => 'clients_tags_relations',
+				'parent_field' => 'ctr_cli_id', // client_id
+				'child_field' => 'ctr_ct_id', //client_tag_id
+				'inner_class' => 'col-6 col-sm-3',
+				'table' => 'clienttags',
+				'primary_key' => 'ct_id',
+				'display' => ['ct_name'],
+				'order_by' => 'ct_name',
+				'order' => 'ASC'
+			]
+		];
+
 		$fields['cli_first_name'] = ['label' => 'Vorname',  'required' => true,  'helper' => 'Vornamen eingeben', 'class' => 'col-4 col-sm-4'];
 		$fields['cli_last_name'] = ['label' => 'Familienname',  'required' => true,  'helper' => 'Vornamen eingeben', 'class' => 'col-4 col-sm-4'];
 		$fields['cli_academic_degree'] = ['label' => 'akad. Titel',   'class' => 'col-4 col-sm-4'];

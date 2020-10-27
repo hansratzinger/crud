@@ -33,7 +33,10 @@ class Clienttags extends BaseController
 		$data['title'] = $this->crud->getTableTitle();
 
 		$per_page = 10;
-		$columns = ['ct_id', 'ct_name'];
+		$columns = [
+			// 'ct_id',
+			'ct_name'
+			];
 		// $where = ['t_status' => 'Active']; nur aktive Tag anzeigen
 		$where = null;
 		$order = [

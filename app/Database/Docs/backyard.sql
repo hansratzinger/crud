@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Erstellungszeit: 26. Okt 2020 um 12:49
+-- Erstellungszeit: 27. Okt 2020 um 13:48
 -- Server-Version: 10.3.23-MariaDB-0+deb10u1
 -- PHP-Version: 7.4.9
 
@@ -46,22 +46,6 @@ CREATE TABLE `clients` (
   `cli_deleted_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='cli';
 
---
--- Daten für Tabelle `clients`
---
-
-INSERT INTO `clients` (`cli_id`, `cli_last_name`, `cli_first_name`, `cli_academic_degree`, `cli_email`, `cli_phone`, `cli_street`, `cli_zip`, `cli_town`, `cli_created_at`, `cli_updated_at`, `cli_deleted_at`) VALUES
-(1, 'N', 'Orar anb wa C', 'GtKaa mt ggtglR', 'weta@pid.mq', 'I  t bayauhaat', 'Avt', 'A', 'Nt rnDn', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(2, 'Mgmath aneaviD', 'Uyha hll', 'Bi i a aaaDvo\'t', 'suzipa@hebebni.bq', '8573137958', 'UabOu ra la', 'GuKrhuaa', 'Arhgmk', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(3, 'Bytga  ha', 'K', 'IomanamaiaRvan', 'kemir@fu.ax', 'Uiyleg\'aa', 'Ahanl ltaiitaia', 'Aaynkm', 'Ht e', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(4, 'Blhmk', 'NaayD ht rA', 'Gha a', 'hicuru@biminu.pl', 'Ebaahm  amakn', 'Et\'r hlh tutlr', 'Vbmana', 'M', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(5, 'U ygna', 'Nlhlysihnta', 'Nattlhgnhao', 'aruvam@kejjugu.as', 'O', 'Naeabnvnmg t', 'L\'', 'Eo  hhgmaiuvah', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(6, 'Naomaaaar raa', 'G eo ohgau\' s', 'Bak', 'ni@biahtov.au', 'Ieaboo', 'Mahru', 'Galathk', 'Sl', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(7, 'Apbu m bm l', 'Aahtt hurhgblhf', 'Tan agnkan\'Dyaa', 'to@oli.cy', '\'', 'AihDhaha\'aR nal', 'G ea eh', 'Eanvma  a', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(8, 'Apbu m bm l', 'Aahtt hurhgblhf', 'Tan agnkan\'Dyaa', 'to@oli.cy', '\'', 'AihDhaha\'aR nal', 'G ea eh', 'Eanvma  a', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(9, 'Ratzinger', 'Maria', 'BA', 'maria@ijp.at', '067687837684', 'Assmayerg. 11', '1190', 'WIE', '2020-10-26 12:41:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(10, 'Ilse ', 'Ratzinger', 'Mag.', 'ratzinger@ijp.at', '067687837688', 'Am Schulberg 22', '2124', 'Niederkreuzstetten', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
-
 -- --------------------------------------------------------
 
 --
@@ -75,18 +59,6 @@ CREATE TABLE `clients_tags_relations` (
   `ctr_ct_id` int(11) NOT NULL,
   `ctr_created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Daten für Tabelle `clients_tags_relations`
---
-
-INSERT INTO `clients_tags_relations` (`ctr_id`, `ctr_cli_id`, `ctr_ct_id`, `ctr_created_at`) VALUES
-(1, 8, 2, '2020-10-26 12:38:10'),
-(2, 8, 3, '2020-10-26 12:38:10'),
-(4, 5, 1, '2020-10-26 12:43:26'),
-(5, 5, 3, '2020-10-26 12:43:26'),
-(6, 5, 2, '2020-10-26 12:45:52'),
-(7, 10, 3, '2020-10-26 12:47:56');
 
 -- --------------------------------------------------------
 
@@ -108,7 +80,9 @@ CREATE TABLE `clienttags` (
 INSERT INTO `clienttags` (`ct_id`, `ct_name`, `ct_created_at`) VALUES
 (1, 'RaucherIn', '0000-00-00 00:00:00'),
 (2, 'Single ', '0000-00-00 00:00:00'),
-(3, 'Tierhalter', '0000-00-00 00:00:00');
+(3, 'Tierhalter', '0000-00-00 00:00:00'),
+(4, '1 Kind', '2020-10-27 11:57:00'),
+(5, '2 Kinder', '2020-10-27 12:05:00');
 
 -- --------------------------------------------------------
 
@@ -157,11 +131,11 @@ CREATE TABLE `estates` (
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `estate_tags`
+-- Tabellenstruktur für Tabelle `estate_tags_relations`
 --
 
-DROP TABLE IF EXISTS `estate_tags`;
-CREATE TABLE `estate_tags` (
+DROP TABLE IF EXISTS `estate_tags_relations`;
+CREATE TABLE `estate_tags_relations` (
   `et_id` int(11) NOT NULL,
   `et_est_id` int(11) NOT NULL,
   `et_t_id` int(11) NOT NULL,
@@ -209,7 +183,10 @@ INSERT INTO `tags` (`t_id`, `t_name`, `t_created_at`) VALUES
 (40, 'Fitnessraum', '0000-00-00 00:00:00'),
 (41, 'Müllschlucker', '0000-00-00 00:00:00'),
 (42, 'Geschirrspüler', '0000-00-00 00:00:00'),
-(43, 'Geschirrspüler', '0000-00-00 00:00:00');
+(43, 'Geschirrspüler', '0000-00-00 00:00:00'),
+(44, 'Tiefkühlschrank', '0000-00-00 00:00:00'),
+(45, 'barrierefrei', '0000-00-00 00:00:00'),
+(46, 'Dusche mit Rigolabfluss', '2020-10-27 11:55:00');
 
 -- --------------------------------------------------------
 
@@ -230,14 +207,6 @@ CREATE TABLE `users` (
   `u_updated_at` datetime NOT NULL,
   `u_deleted_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Daten für Tabelle `users`
---
-
-INSERT INTO `users` (`u_id`, `u_lastname`, `u_firstname`, `u_academic_degree`, `u_password`, `u_email`, `u_phone`, `u_created_at`, `u_updated_at`, `u_deleted_at`) VALUES
-(20, 'Ratzinger', 'Hans', '', '$2y$10$G8K7BxtpiWz0rY0xrciV0Ox5lt08noTI5oHF1Yz05AyOmKC8mTr0u', 'hans@ratzinger.com', '067687837602', '2020-10-13 13:50:05', '2020-10-13 16:35:26', '0000-00-00 00:00:00'),
-(21, 'Ratzinger', 'Ilse', 'Magister', '$2y$10$adGTQPKi9TOK7PefB1ox6eUntz4GhJRaaHjDRCXssreaDp2sPcdpO', 'ratzinger@ijp.at', '067687837688', '2020-10-13 17:16:38', '2020-10-13 17:52:00', '0000-00-00 00:00:00');
 
 --
 -- Indizes der exportierten Tabellen
@@ -268,9 +237,9 @@ ALTER TABLE `estates`
   ADD PRIMARY KEY (`est_id`);
 
 --
--- Indizes für die Tabelle `estate_tags`
+-- Indizes für die Tabelle `estate_tags_relations`
 --
-ALTER TABLE `estate_tags`
+ALTER TABLE `estate_tags_relations`
   ADD PRIMARY KEY (`et_id`);
 
 --
@@ -293,19 +262,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT für Tabelle `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `cli_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `cli_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT für Tabelle `clients_tags_relations`
 --
 ALTER TABLE `clients_tags_relations`
-  MODIFY `ctr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ctr_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT für Tabelle `clienttags`
 --
 ALTER TABLE `clienttags`
-  MODIFY `ct_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ct_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT für Tabelle `estates`
@@ -314,22 +283,22 @@ ALTER TABLE `estates`
   MODIFY `est_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT für Tabelle `estate_tags`
+-- AUTO_INCREMENT für Tabelle `estate_tags_relations`
 --
-ALTER TABLE `estate_tags`
+ALTER TABLE `estate_tags_relations`
   MODIFY `et_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT für Tabelle `tags`
 --
 ALTER TABLE `tags`
-  MODIFY `t_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `t_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT für Tabelle `users`
 --
 ALTER TABLE `users`
-  MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

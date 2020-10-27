@@ -38,7 +38,7 @@ class Estates extends BaseController
 		$data['title'] = $this->crud->getTableTitle();
 
 		$per_page = 20;
-		$columns = [
+		$columns = [			// angezeigte Spalten in Index-Ansicht
 			'est_id',
 			'est_name',
 			'est_street',

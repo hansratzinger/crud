@@ -29,7 +29,7 @@
         </li>        
         <li class="nav-item">
             <a href="/clients" class="nav-link <?= $request->uri->getSegment(1) == 'clients' ? 'active' : null; ?>">
-                <i class="nav-icon fas fa-tags"></i>
+            <i class="nav-icon fas fa-users"></i>
                 <p>Clients</p>
             </a>
         </li>       

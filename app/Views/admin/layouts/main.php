@@ -169,8 +169,8 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="/" class="brand-link">
-                <img src="/admin/assets/img/crud_logo.png" alt="CI4 CRUD Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">CI4 Crud</span>
+                <img src="/admin/assets/img/ijp_logo light_kl_128.png" alt="IJP Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">IJP backyard</span>
             </a>
 
             <!-- Sidebar -->
